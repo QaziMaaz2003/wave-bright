@@ -27,8 +27,18 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) return;
+
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    const desktop = window.matchMedia('(min-width: 62rem)');
+    const onChange = (e: MediaQueryListEvent) => e.matches && setOpen(false);
+    document.addEventListener('keydown', onKey);
+    desktop.addEventListener('change', onChange);
+
     return () => {
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+      desktop.removeEventListener('change', onChange);
     };
   }, [open]);
 
@@ -75,7 +85,8 @@ export function Header() {
         ))}
         <Button to="/contact#bid">Request a bid</Button>
         <a className="wb-mobile__phone" href={siteInfo.contact.phoneHref}>
-          Call {siteInfo.contact.phone}
+          <Icon name="phone" size={18} />
+          {siteInfo.contact.phone}
         </a>
       </nav>
     </header>
