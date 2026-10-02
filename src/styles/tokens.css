@@ -1,0 +1,58 @@
+/*
+ * Design tokens — one-to-one with WordPress theme.json
+ *   --wb-color-*   → settings.color.palette
+ *   --wb-font-*    → settings.typography.fontFamilies
+ *   --wb-space-*   → settings.spacing.spacingSizes
+ *   --wb-content / --wb-wide → settings.layout.contentSize / wideSize
+ * Values mirror the Lovable reference theme (dark navy + signal orange + cyan).
+ */
+:root {
+  /* colour */
+  --wb-color-background: #090e12;
+  --wb-color-surface: #0f161b;
+  --wb-color-card: #12191f;
+  --wb-color-secondary: #1f282e;
+  --wb-color-border: #2a343c;
+  --wb-color-foreground: #f3f2ee;
+  --wb-color-muted: #95a0a9;
+  --wb-color-primary: #ff771f;
+  --wb-color-primary-hover: #ff8c42;
+  --wb-color-primary-ink: #030a11;
+  --wb-color-accent: #f7a224;
+  --wb-color-signal: #00cdee;
+
+  /* typography */
+  --wb-font-display: 'Archivo Black', 'Arial Black', sans-serif;
+  --wb-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --wb-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --wb-text-xs: 0.75rem;
+  --wb-text-sm: 0.875rem;
+  --wb-text-base: 1rem;
+  --wb-text-lg: 1.125rem;
+  --wb-text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --wb-text-2xl: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  --wb-text-3xl: clamp(2.1rem, 1.4rem + 3vw, 3.75rem);
+  --wb-text-hero: clamp(2.4rem, 1.3rem + 4.2vw, 4.5rem);
+
+  /* spacing */
+  --wb-space-1: 0.25rem;
+  --wb-space-2: 0.5rem;
+  --wb-space-3: 0.75rem;
+  --wb-space-4: 1rem;
+  --wb-space-5: 1.5rem;
+  --wb-space-6: 2rem;
+  --wb-space-7: 3rem;
+  --wb-space-8: 4.5rem;
+  --wb-space-9: clamp(4rem, 3rem + 5vw, 7.5rem);
+
+  /* layout */
+  --wb-content: 1200px;
+  --wb-wide: 1360px;
+  --wb-gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
+  --wb-radius: 2px;
+  --wb-header-h: 72px;
+
+  /* motion */
+  --wb-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}

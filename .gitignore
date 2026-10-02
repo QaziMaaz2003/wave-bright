@@ -1,0 +1,8 @@
+node_modules
+dist
+*.tsbuildinfo
+.env
+.env.local
+
+# internal client research (kept locally, never published)
+docs/reference/
