@@ -117,10 +117,19 @@
   top: 0;
   z-index: 50;
   height: var(--wb-header-h);
+  border-bottom: 1px solid var(--wb-color-border);
+}
+/* The frosted background lives on a pseudo-element: putting backdrop-filter on the header
+   itself makes it the containing block for the position:fixed mobile menu, which then
+   collapses to the header's height instead of filling the screen. */
+.wb-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(9, 14, 18, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--wb-color-border);
 }
 .wb-header__inner {
   height: 100%;
@@ -215,11 +224,12 @@
   padding: var(--wb-space-6) var(--wb-gutter);
   background: var(--wb-color-background);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .wb-mobile[hidden] {
   display: none;
 }
-.wb-mobile a:not(.wb-btn) {
+.wb-mobile a:not(.wb-btn):not(.wb-mobile__phone) {
   padding: var(--wb-space-4) 0;
   border-bottom: 1px solid var(--wb-color-border);
   font-family: var(--wb-font-display);
@@ -231,10 +241,22 @@
 .wb-mobile .wb-btn {
   margin-top: var(--wb-space-5);
 }
-.wb-mobile__phone {
-  margin-top: var(--wb-space-4);
+.wb-mobile .wb-mobile__phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: var(--wb-space-3);
+  padding: var(--wb-space-4);
+  border: 1px solid var(--wb-color-border);
+  border-radius: var(--wb-radius);
   font-family: var(--wb-font-mono);
-  color: var(--wb-color-muted);
+  font-size: var(--wb-text-lg);
+  font-weight: 700;
+  color: var(--wb-color-foreground);
+}
+.wb-mobile__phone svg {
+  color: var(--wb-color-primary);
 }
 
 @media (min-width: 62rem) {

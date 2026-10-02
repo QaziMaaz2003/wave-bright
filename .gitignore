@@ -6,3 +6,4 @@ dist
 
 # internal client research (kept locally, never published)
 docs/reference/
+.vite/
