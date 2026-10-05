@@ -4,6 +4,7 @@
  */
 import { Link } from 'react-router-dom';
 import { siteInfo } from '../content/site';
+import { Accent } from '../components/ui/Accent';
 import { Button } from '../components/ui/Button';
 import { CountUp } from '../components/ui/CountUp';
 import { Gallery, type GalleryItem } from '../components/ui/Gallery';
@@ -42,7 +43,9 @@ export function Hero({
       <div className="wb-container">
         <div className="wb-hero__content">
           <span className="wb-eyebrow">{eyebrow}</span>
-          <h1>{title}</h1>
+          <h1>
+            <Accent text={title} />
+          </h1>
           <p className="wb-hero__text">{text}</p>
           <div className="wb-btns">
             <Button to={primary.to}>{primary.label}</Button>
@@ -72,6 +75,7 @@ export function PageHero({
   title,
   text,
   image,
+  imagePosition,
   chips,
   children,
 }: {
@@ -79,6 +83,8 @@ export function PageHero({
   title: string;
   text: string;
   image: string;
+  /** CSS object-position for the background photo, e.g. 'center 12%' */
+  imagePosition?: string;
   chips?: { label: string; href: string }[];
   /** optional strip pinned to the bottom edge of the hero (stats, quick actions) */
   children?: React.ReactNode;
@@ -86,11 +92,13 @@ export function PageHero({
   return (
     <section className="wb-pagehero">
       <div className="wb-pagehero__bg">
-        <img src={image} alt="" />
+        <img src={image} alt="" style={imagePosition ? { objectPosition: imagePosition } : undefined} />
       </div>
       <div className="wb-container wb-pagehero__inner">
         <span className="wb-eyebrow">{eyebrow}</span>
-        <h1>{title}</h1>
+        <h1>
+            <Accent text={title} />
+          </h1>
         <p>{text}</p>
         {chips && (
           <nav className="wb-chips" aria-label="On this page">
@@ -234,17 +242,24 @@ export function GallerySection({
   intro,
   items,
   alt,
+  cta,
 }: {
   eyebrow: string;
   title: string;
   intro?: string;
   items: GalleryItem[];
   alt?: boolean;
+  cta?: Cta;
 }) {
   return (
     <Section variant={alt ? 'alt' : undefined}>
       <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
       <Gallery items={items} />
+      {cta && (
+        <div className="wb-btns wb-section__foot">
+          <Button to={cta.to}>{cta.label}</Button>
+        </div>
+      )}
     </Section>
   );
 }
@@ -328,7 +343,9 @@ export function Split({
         </div>
         <div className="wb-split__body">
           <span className="wb-eyebrow">{eyebrow}</span>
-          <h2>{title}</h2>
+          <h2>
+            <Accent text={title} />
+          </h2>
           {paragraphs.map((p) => (
             <p key={p}>{p}</p>
           ))}
@@ -357,7 +374,7 @@ export function Steps({
   eyebrow: string;
   title: string;
   intro?: string;
-  steps: { title: string; text: string }[];
+  steps: { title: string; text: string; deliverable?: string }[];
   plain?: boolean;
 }) {
   return (
@@ -368,6 +385,12 @@ export function Steps({
           <li className="wb-step" key={s.title}>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
+            {s.deliverable && (
+              <span className="wb-step__out">
+                <Icon name="check" size={14} />
+                {s.deliverable}
+              </span>
+            )}
           </li>
         ))}
       </ol>
@@ -458,13 +481,17 @@ export function Faq({
 
 /* Pattern: cta-band → core/cover + core/heading + core/buttons */
 export function CtaBand({
+  eyebrow = 'Start a project',
   title,
   text,
   image,
+  cta = { label: 'Request a bid', to: '/contact#bid' },
 }: {
+  eyebrow?: string;
   title: string;
   text: string;
   image: string;
+  cta?: Cta;
 }) {
   const { contact } = siteInfo;
   return (
@@ -473,11 +500,13 @@ export function CtaBand({
         <img src={image} alt="" loading="lazy" />
       </div>
       <div className="wb-container">
-        <span className="wb-eyebrow">Start a project</span>
-        <h2>{title}</h2>
+        <span className="wb-eyebrow">{eyebrow}</span>
+        <h2>
+          <Accent text={title} />
+        </h2>
         <p>{text}</p>
         <div className="wb-btns" style={{ alignItems: 'center', gap: '1.5rem' }}>
-          <Button to="/contact#bid">Request a bid</Button>
+          <Button to={cta.to}>{cta.label}</Button>
           <a className="wb-cta__phone" href={contact.phoneHref}>
             <Icon name="phone" size={18} />
             {contact.phone}

@@ -69,10 +69,10 @@
   padding: 0.8rem 1.5rem;
   border: 1px solid transparent;
   border-radius: var(--wb-radius);
-  font-family: var(--wb-font-mono);
+  font-family: var(--wb-font-body);
   font-size: var(--wb-text-sm);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.2s var(--wb-ease), border-color 0.2s var(--wb-ease),
@@ -319,7 +319,8 @@
   padding-block: var(--wb-space-5);
 }
 .wb-hero h1 {
-  font-size: clamp(2.2rem, min(1.3rem + 4.2vw, 8.5vh), 4.5rem);
+  font-size: clamp(1.6rem, min(1.2rem + 4.6vw, 8vw, 8vh), 4.75rem);
+  line-height: 0.98;
   margin-block: clamp(0.75rem, 2.4vh, 1.5rem);
 }
 .wb-hero h1 em {
@@ -428,7 +429,8 @@
     linear-gradient(to top, var(--wb-color-background), transparent 45%);
 }
 .wb-pagehero__inner h1 {
-  font-size: clamp(2.1rem, min(1.4rem + 3vw, 7vh), 3.75rem);
+  font-size: clamp(1.7rem, min(1.2rem + 3.6vw, 9vw, 7.5vh), 4.25rem);
+  line-height: 1;
   margin-block: clamp(0.75rem, 2vh, 1.25rem);
   max-width: 46rem;
 }

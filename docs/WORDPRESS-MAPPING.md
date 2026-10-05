@@ -56,6 +56,15 @@ Keep the `--wb-*` names in the CSS and expose them from `theme.json` as custom p
 | `Pillars` `.wb-pillars` | **Columns** (3) → **Group** with left border |
 | `Faq` `.wb-faq` | One **Details** block per question — it's the same native `<details>` element |
 | `CtaBand` `.wb-cta` | **Cover** + Heading + Paragraph + Buttons |
+| `ProjectTypes` `.wb-types` | **Columns** (3) of **Group**: Image (16:10, orange bottom border) + Heading + Paragraph + a **List** styled as chips (`.wb-tags`) + link. The whole card is clickable via the stretched link (`.wb-card__link::after`, so the card needs `position: relative`) |
+| `SiteLog` `.wb-log` + `TowerArt` | Register a **Project** custom post type (title, site no., location, scope, result, gallery) and show it with a **Query Loop** (3 columns). Until then, a Columns block of Groups; the tower line-art is the decorative SVG in `TowerArt.tsx` |
+| `CaseStudies` | Same **Project** post type, filtered to "featured" — the React build only shows this section when `projectsPage.caseStudies` is non-empty |
+| `RoleCards` `.wb-roles` / `HiringBand` `.wb-hiring` | A **Job** custom post type (or the **WP Job Manager** plugin) in a Query Loop. The hiring band shows real postings when present, otherwise the generic role chips + Apply button (`openings` in `site.ts`) |
+| Step deliverables `.wb-step__out` | A short **Paragraph** with class `wb-step__out` under each step heading |
+| Careers application form | Form plugin with the same fields (name, phone, email, location, role, experience, certifications, about you). Add a **file-upload** field for CV/resume — the React demo has none because it has no backend |
+| Two-tone headings `.wb-accent` | In each **Heading** block select the key phrase → Text colour → **Primary**. Core adds `<mark class="has-inline-color has-primary-color">`; add `mark.has-inline-color { background: none; }` if the theme doesn't reset it. In `site.ts` the orange phrase is written between asterisks: `'We build the *infrastructure* that carries the signal.'` |
+| Uppercase display headings | `theme.json` → `styles.elements.heading.typography.textTransform: "uppercase"` (font Archivo Black, line-height ≈1) |
+| Dark-orange hero / CTA photos (`sections.css`) | **Cover** block: set the image, then add the CSS class `wb-warm` equivalent — i.e. copy the `filter` + `::after` orange-glow rules for `.wb-hero`, `.wb-pagehero`, `.wb-cta`; or pre-tone the photos in an editor and use a plain **Cover** with a 60–70% dark overlay and an orange radial gradient |
 | `Hero` full-screen height | **Cover** with `minHeight` = `calc(100svh - 72px)` (the `.wb-hero` CSS does this); stats row pinned to its bottom |
 | `CountUp` / `StatsBand` metrics | Any element with `data-count-to="30"` `data-count-suffix="+"` + `wordpress/count-up.js` (enqueue in the footer). Falls back to the written number without JS / with reduced motion |
 | `CardGrid` icons `.wb-card__icon` | Inline SVG in a **Custom HTML** block, or an **Image** block (SVG) inside the card Group |
@@ -75,13 +84,15 @@ Most `.wb-*` classes can be added to blocks via *Advanced → Additional CSS cla
 
 ## 4. Pages & navigation
 
-Menu (Appearance → Editor → Navigation): **Home**, **Services**, **Contact Us**.
+Menu (Appearance → Editor → Navigation): **Home**, **Services**, **Projects**, **Careers**, **Contact Us**.
 
 | Page | Slug | Content source |
 | --- | --- | --- |
 | Home | `/` (set as static front page) | `home` in `site.ts` |
 | Services | `/services/` | `servicesPage`, `constructionServices`, `testingServices` |
 | Contact Us | `/contact/` | `contactPage`, `siteInfo.contact` |
+| Projects | `/projects/` | `projectsPage` |
+| Careers | `/careers/` | `careersPage`, `roles`, `homeHiring` |
 
 Anchors used by links: `#process`, `#construction`, `#testing`, `#bid` — add them as the
 **HTML anchor** of the matching Group/Details blocks. Switch from
@@ -143,3 +154,12 @@ protection (honeypot / reCAPTCHA / Turnstile).
 | Safety section | Home "Safety" section. It only states things from the live site; the `safety.credentials` list in `site.ts` is empty and renders OSHA/NATE-style badges once the client supplies real ones |
 
 **Still needed from the client** (the report recommends them, but they cannot be invented): safety record / certifications, "Trusted by" client or carrier logos, project case studies with real photos, a Careers page (and whether they are hiring), and — only if they actually do the work — 5G / Small Cell / DAS / EV-charging capabilities.
+
+## 10. Projects & Careers — what is real vs. placeholder
+
+Both pages are built only from facts on wavcomm.com (service lists, since 1995, nationwide) plus generic process wording. Items the client needs to confirm or supply before launch:
+
+- **Site log (Projects):** the five names (Emigrant Peak LTE, Hollywood Post, Mammoth High, IE04364A, LA02335A) come from the file names of the photos on the current website. Confirm they are projects the client wants shown, then add location, scope and results in `projectsPage.siteLog.items[].meta`, or build real **Project** posts. Real case studies go in `projectsPage.caseStudies` (the section appears automatically).
+- **Careers:** the six crew roles describe the kinds of work on a Wavcomm job; they are **not** announced openings. Confirm whether Wavcomm is hiring, which roles, benefits, and the HR contact / email for applications. Real postings go in `careersPage.openings` (they replace the generic role chips).
+- **Application form:** needs an inbox (form plugin) and, ideally, resume upload.
+- **Photos:** all Unsplash stock — swap in the client's crew and project photos (the Careers hero and the galleries benefit most).

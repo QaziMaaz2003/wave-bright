@@ -494,10 +494,40 @@
   }
 }
 
+/* ── Dark-orange theme (follows the Lovable reference) ─────────────────────
+   Hero / page-hero / CTA photos are toned warm (sepia → orange) and lit by an orange glow,
+   so every first screen reads dark + orange instead of the photo's own blue/purple. */
+.wb-hero__bg img,
+.wb-pagehero__bg img,
+.wb-cta__bg img {
+  filter: sepia(0.7) saturate(1.6) hue-rotate(-14deg) brightness(0.78) contrast(1.08);
+}
+.wb-hero::after,
+.wb-pagehero::after,
+.wb-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 65% 75% at 88% 18%, rgba(255, 119, 31, 0.34), transparent 66%),
+    radial-gradient(ellipse 50% 45% at 100% 100%, rgba(255, 119, 31, 0.16), transparent 70%);
+}
+
+/* thin orange bar closing each card (as in the reference) */
+.wb-card::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin-top: var(--wb-space-5);
+  background: var(--wb-color-primary);
+}
+
 /* Wide screens: enlarge the hero photo from its left edge so the tower sits right of the headline */
 @media (min-width: 62rem) {
   .wb-hero__bg img {
-    transform: scale(1.25);
+    transform: scale(1.32);
     transform-origin: 0% 35%;
   }
 }
@@ -590,7 +620,7 @@
     padding-block: 0.5rem;
   }
   .wb-hero h1 {
-    font-size: clamp(1.9rem, min(1.3rem + 4.2vw, 8.5vh), 4.5rem);
+    font-size: clamp(1.6rem, min(1.2rem + 4.6vw, 8vw, 8vh), 4.75rem);
   }
 }
 

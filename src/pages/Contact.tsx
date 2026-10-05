@@ -1,17 +1,9 @@
-import { useState } from 'react';
 import { contactPage, home, siteInfo } from '../content/site';
+import { FormStatusNote, useFormSubmit } from '../components/forms/useFormSubmit';
+import { Accent } from '../components/ui/Accent';
 import { Icon } from '../components/ui/Icon';
 import { Section } from '../components/ui/Section';
 import { CtaBand, Faq, PageHero, QuickActions, Split, Steps } from '../sections/Blocks';
-
-/**
- * Optional: set VITE_FORM_ENDPOINT (e.g. a Formspree URL) to receive submissions.
- * In WordPress this whole <form> is replaced by a form plugin shortcode/block
- * (Contact Form 7, WPForms, Gravity Forms…) — the field list below is the spec.
- */
-const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
-
-type Status = 'idle' | 'sending' | 'sent' | 'unconfigured' | 'error';
 
 const projectTypes = [
   'Tower erection / building',
@@ -23,33 +15,13 @@ const projectTypes = [
 ];
 
 function ContactForm() {
-  const [status, setStatus] = useState<Status>('idle');
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (!FORM_ENDPOINT) {
-      setStatus('unconfigured');
-      return;
-    }
-    setStatus('sending');
-    try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form),
-      });
-      if (!res.ok) throw new Error(String(res.status));
-      form.reset();
-      setStatus('sent');
-    } catch {
-      setStatus('error');
-    }
-  }
+  const { status, onSubmit } = useFormSubmit();
 
   return (
     <form className="wb-form" id={contactPage.form.id} onSubmit={onSubmit}>
-      <h2>{contactPage.form.title}</h2>
+      <h2>
+        <Accent text={contactPage.form.title} />
+      </h2>
       <p>{contactPage.form.text}</p>
 
       <div className="wb-form__row wb-form__row--2">
@@ -103,23 +75,7 @@ function ContactForm() {
         </button>
       </div>
 
-      <div aria-live="polite">
-        {status === 'sent' && (
-          <p className="wb-form__note">Thank you — your request has been sent. We will be in touch.</p>
-        )}
-        {status === 'error' && (
-          <p className="wb-form__note">
-            Something went wrong sending your request. Please call us at{' '}
-            <a href={siteInfo.contact.phoneHref}>{siteInfo.contact.phone}</a>.
-          </p>
-        )}
-        {status === 'unconfigured' && (
-          <p className="wb-form__note">
-            This form isn&rsquo;t connected to an inbox yet. For now, please call us at{' '}
-            <a href={siteInfo.contact.phoneHref}>{siteInfo.contact.phone}</a>.
-          </p>
-        )}
-      </div>
+      <FormStatusNote status={status} sentText="Thank you — your request has been sent. We will be in touch." />
     </form>
   );
 }
