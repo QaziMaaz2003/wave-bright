@@ -1,4 +1,4 @@
-import { constructionServices, home, testingServices } from '../content/site';
+import { constructionServices, home, homeHiring, roles, testingServices } from '../content/site';
 import {
   Anatomy,
   CardGrid,
@@ -11,6 +11,7 @@ import {
   Split,
   Steps,
 } from '../sections/Blocks';
+import { HiringBand } from '../sections/ProjectBlocks';
 
 export default function Home() {
   const { hero, stats, capabilities, about, anatomy, process, split, pillars, safety, gallery, faq, cta } =
@@ -58,6 +59,7 @@ export default function Home() {
       </Pillars>
       <GallerySection {...gallery} />
       <Faq {...faq} />
+      <HiringBand {...homeHiring} roles={roles} cta={{ label: 'See careers', to: '/careers' }} />
       <CtaBand {...cta} />
     </>
   );

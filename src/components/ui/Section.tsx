@@ -1,3 +1,5 @@
+import { Accent } from './Accent';
+
 /** → core/group (align: full) wrapping a constrained inner container */
 export function Section({
   id,
@@ -28,7 +30,9 @@ export function SectionHead({
   return (
     <header className="wb-section__head">
       <span className="wb-eyebrow">{eyebrow}</span>
-      <h2>{title}</h2>
+      <h2>
+        <Accent text={title} />
+      </h2>
       {intro && <p>{intro}</p>}
     </header>
   );

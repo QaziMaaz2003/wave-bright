@@ -32,7 +32,7 @@ src/
   components/layout/     Header, Footer, Layout (→ template parts)
   components/ui/         Button, Section, Icon
   sections/Blocks.tsx    reusable section patterns (→ block patterns)
-  pages/                 Home, Services, Contact, NotFound
+  pages/                 Home, Services, Projects, Careers, Contact, NotFound
 ```
 
 ## Contact form
