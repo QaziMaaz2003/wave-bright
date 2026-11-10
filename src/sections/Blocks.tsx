@@ -7,6 +7,7 @@ import { siteInfo } from '../content/site';
 import { Accent } from '../components/ui/Accent';
 import { Button } from '../components/ui/Button';
 import { CountUp } from '../components/ui/CountUp';
+import { CoverageMap, type CoverageOffice } from '../components/ui/CoverageMap';
 import { Gallery, type GalleryItem } from '../components/ui/Gallery';
 import { Icon, type IconName } from '../components/ui/Icon';
 import { Section, SectionHead } from '../components/ui/Section';
@@ -355,6 +356,48 @@ export function Split({
               <Button to={cta.to}>{cta.label}</Button>
             </div>
           )}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* Pattern: coverage-map → core/columns: text + Custom HTML (SVG map) */
+export function Coverage({
+  eyebrow,
+  title,
+  text,
+  offices,
+  caption,
+}: {
+  eyebrow: string;
+  title: string;
+  text: string;
+  offices: CoverageOffice[];
+  caption: string;
+}) {
+  return (
+    <Section>
+      <div className="wb-coverage">
+        <div className="wb-coverage__body">
+          <span className="wb-eyebrow">{eyebrow}</span>
+          <h2>
+            <Accent text={title} />
+          </h2>
+          <p>{text}</p>
+          <ul className="wb-coverage__offices">
+            {offices.map((o) => (
+              <li key={o.city}>
+                <span className="wb-coverage__city">
+                  {o.city}, CA{o.sub ? ` — ${o.sub}` : ''}
+                </span>
+                <span className="wb-coverage__region">{o.region}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="wb-coverage__map">
+          <CoverageMap offices={offices} caption={caption} />
         </div>
       </div>
     </Section>

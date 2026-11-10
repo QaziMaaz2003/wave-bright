@@ -70,6 +70,7 @@ Keep the `--wb-*` names in the CSS and expose them from `theme.json` as custom p
 | `CardGrid` icons `.wb-card__icon` | Inline SVG in a **Custom HTML** block, or an **Image** block (SVG) inside the card Group |
 | `Anatomy` + `TowerDiagram` | **Columns**: left = **Custom HTML** block containing the SVG from `TowerDiagram.tsx`; right = ordered **List** (`.wb-anatomy__list`) |
 | `Gallery` `.wb-gallery` | **Gallery** block (or Group of Images) with class `wb-gallery`; add `wb-gallery__item--tall` / `--wide` to individual images |
+| `Coverage` `.wb-coverage` + `CoverageMap` | **Columns**: left = Heading/Paragraph/List (office names + region); right = **Custom HTML** block containing the SVG from `CoverageMap.tsx` (a stylised CA outline with pinned office markers) |
 | `Callout` `.wb-callout` | **Group** with class `wb-callout` (icon + heading + paragraph) |
 | `QuickActions` `.wb-quick` | **Columns** (3) of linked Groups |
 | `PageHero` chips `.wb-chips` | **Buttons** block (links to `#anchors`) with class `wb-chips` |
@@ -162,4 +163,5 @@ Both pages are built only from facts on wavcomm.com (service lists, since 1995, 
 - **Site log (Projects):** the five names (Emigrant Peak LTE, Hollywood Post, Mammoth High, IE04364A, LA02335A) come from the file names of the photos on the current website. Confirm they are projects the client wants shown, then add location, scope and results in `projectsPage.siteLog.items[].meta`, or build real **Project** posts. Real case studies go in `projectsPage.caseStudies` (the section appears automatically).
 - **Careers:** the six crew roles describe the kinds of work on a Wavcomm job; they are **not** announced openings. Confirm whether Wavcomm is hiring, which roles, benefits, and the HR contact / email for applications. Real postings go in `careersPage.openings` (they replace the generic role chips).
 - **Application form:** needs an inbox (form plugin) and, ideally, resume upload.
-- **Photos:** all Unsplash stock — swap in the client's crew and project photos (the Careers hero and the galleries benefit most).
+- **Photos:** all Unsplash stock, except the Projects page "Field photography" gallery, which now uses the client's real job-site photos (crew at height, crane lifts, traffic control, rooftop DAS, standby power, site security). Swap in more real photos elsewhere as they become available (the Careers hero and the Home gallery still use stock).
+- **Coverage (Home):** the client confirmed a second office in Sacramento, CA (Nor Cal) alongside the existing Ontario, CA office (SoCal/HQ) — shown in `home.coverage` and rendered by the `Coverage` section. Street address and phone for Sacramento are not yet supplied; add them to `siteInfo` and the Contact page once confirmed.
