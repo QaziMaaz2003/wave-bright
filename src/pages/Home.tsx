@@ -2,6 +2,7 @@ import { constructionServices, home, homeHiring, roles, testingServices } from '
 import {
   Anatomy,
   CardGrid,
+  Coverage,
   Credentials,
   CtaBand,
   Faq,
@@ -14,12 +15,26 @@ import {
 import { HiringBand } from '../sections/ProjectBlocks';
 
 export default function Home() {
-  const { hero, stats, capabilities, about, anatomy, process, split, pillars, safety, gallery, faq, cta } =
-    home;
+  const {
+    hero,
+    stats,
+    capabilities,
+    coverage,
+    about,
+    anatomy,
+    process,
+    split,
+    pillars,
+    safety,
+    gallery,
+    faq,
+    cta,
+  } = home;
   return (
     <>
       <Hero {...hero} stats={stats} />
       <CardGrid {...capabilities} />
+      <Coverage {...coverage} />
       <Split
         eyebrow={about.eyebrow}
         title={about.title}

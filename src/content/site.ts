@@ -9,6 +9,7 @@
 
 import type { IconName } from '../components/ui/Icon';
 import type { GalleryItem } from '../components/ui/Gallery';
+import type { CoverageOffice } from '../components/ui/CoverageMap';
 
 export const img = (name: string) => `/images/${name}.jpg`;
 
@@ -148,6 +149,17 @@ export const home = {
         to: '/services#tower',
       },
     ] as { icon: IconName; title: string; text: string; to?: string }[],
+  },
+  /** Nor Cal confirmed by the client (2026); street address/phone to be added once supplied. */
+  coverage: {
+    eyebrow: 'Coverage',
+    title: 'Two offices. *One accountable crew.*',
+    text: 'Wavcomm is based in Northern and Southern California, with crews, materials and equipment staged to mobilize statewide — and on nationwide projects beyond it.',
+    offices: [
+      { city: 'Sacramento', region: 'Nor Cal', x: 118, y: 104, labelSide: 'right' },
+      { city: 'Ontario', region: 'SoCal', sub: 'HQ', x: 168, y: 324, labelSide: 'right' },
+    ] as CoverageOffice[],
+    caption: 'Active offices',
   },
   anatomy: {
     eyebrow: 'Anatomy of a site',
@@ -660,14 +672,52 @@ export const projectsPage = {
   gallery: {
     eyebrow: 'Field photography',
     title: 'The work, *up close.*',
-    intro: 'Towers, antennas, heavy equipment and site civil — the kind of work our crews do.',
+    intro: 'Towers, antennas, heavy equipment and site civil — straight from our crews’ own job sites.',
     items: [
-      { src: img('tower-climber'), alt: 'Technician climbing a steel tower high above the coastline', label: 'Work at height', shape: 'tall' },
-      { src: img('construction-site'), alt: 'Building site with a tower crane under dramatic clouds', label: 'Site preparation', shape: 'wide' },
-      { src: img('antenna-array'), alt: 'Microwave dishes and antennas on a tower', label: 'Antenna systems' },
-      { src: img('excavator-bucket'), alt: 'Excavator digging soil on a construction site', label: 'Excavations' },
-      { src: img('tower-night-sutro'), alt: 'Illuminated broadcast tower above city lights at night', label: 'Tower sites' },
-      { src: img('crane-yellow'), alt: 'Yellow crane over a busy construction site', label: 'Crane work' },
+      {
+        src: img('tower-crew-climbers'),
+        alt: 'Tower technicians working at height on a lattice tower crowded with antennas and cabling',
+        label: 'Crew at height',
+        shape: 'tall',
+      },
+      {
+        src: img('traffic-control-lane-closure'),
+        alt: 'Traffic control crew and a Lane Closed sign managing an urban street during construction',
+        label: 'Traffic control',
+        shape: 'wide',
+      },
+      {
+        src: img('monopole-crane-lift'),
+        alt: 'Crane lifting antenna equipment to the top of a monopole tower',
+        label: 'Monopole lifts',
+      },
+      {
+        src: img('security-enclosure-install'),
+        alt: 'Welded steel security enclosure protecting a site alarm and lock on an equipment building',
+        label: 'Site security',
+      },
+      {
+        src: img('rooftop-das-antennas'),
+        alt: 'Rooftop DAS antenna sleeves and equipment installed on a high-rise building',
+        label: 'Rooftop DAS',
+        shape: 'tall',
+      },
+      {
+        src: img('tower-antenna-lift'),
+        alt: 'Crane lifting an antenna mount to the top of a lattice tower against a bright sun and blue sky',
+        label: 'Equipment lifts',
+      },
+      {
+        src: img('standby-generator-pad'),
+        alt: 'Industrial standby generator with a 145-gallon fuel tank behind safety bollards',
+        label: 'Standby power',
+      },
+      {
+        src: img('rooftop-equipment-cabinets'),
+        alt: 'Rooftop equipment cabinets and cable runs mounted along a building’s edge',
+        label: 'Equipment cabinets',
+        shape: 'wide',
+      },
     ] as GalleryItem[],
   },
   cta: {
@@ -833,7 +883,7 @@ export const careersPage = {
       },
       {
         q: 'Where would I work?',
-        a: 'Wavcomm provides construction services nationwide, so work locations depend on the project. Our office is in Ontario, CA.',
+        a: 'Wavcomm provides construction services nationwide, so work locations depend on the project. Our offices are in Ontario, CA (SoCal) and Sacramento, CA (Nor Cal).',
       },
       {
         q: 'What happens after I apply?',
