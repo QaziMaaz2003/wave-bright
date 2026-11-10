@@ -673,13 +673,13 @@ export const projectsPage = {
     eyebrow: 'Field photography',
     title: 'The work, *up close.*',
     intro: 'Towers, antennas, heavy equipment and site civil — straight from our crews’ own job sites.',
+    /**
+     * Ordered as a project would run (mobilize → build → rooftop → power → close-out), and the
+     * `shape` on each one is picked to match its own photo's aspect ratio (tall = very vertical
+     * shots, wide = very horizontal, unset = a squarer crop) so the mosaic crops cleanly instead
+     * of cutting off the subject.
+     */
     items: [
-      {
-        src: img('tower-crew-climbers'),
-        alt: 'Tower technicians working at height on a lattice tower crowded with antennas and cabling',
-        label: 'Crew at height',
-        shape: 'tall',
-      },
       {
         src: img('traffic-control-lane-closure'),
         alt: 'Traffic control crew and a Lane Closed sign managing an urban street during construction',
@@ -687,25 +687,33 @@ export const projectsPage = {
         shape: 'wide',
       },
       {
+        src: img('tower-crew-climbers'),
+        alt: 'Tower technicians working at height on a lattice tower crowded with antennas and cabling',
+        label: 'Crew at height',
+        shape: 'tall',
+      },
+      {
         src: img('monopole-crane-lift'),
         alt: 'Crane lifting antenna equipment to the top of a monopole tower',
         label: 'Monopole lifts',
-      },
-      {
-        src: img('security-enclosure-install'),
-        alt: 'Welded steel security enclosure protecting a site alarm and lock on an equipment building',
-        label: 'Site security',
-      },
-      {
-        src: img('rooftop-das-antennas'),
-        alt: 'Rooftop DAS antenna sleeves and equipment installed on a high-rise building',
-        label: 'Rooftop DAS',
         shape: 'tall',
       },
       {
         src: img('tower-antenna-lift'),
         alt: 'Crane lifting an antenna mount to the top of a lattice tower against a bright sun and blue sky',
         label: 'Equipment lifts',
+        shape: 'tall',
+      },
+      {
+        src: img('rooftop-das-antennas'),
+        alt: 'Rooftop DAS antenna sleeves and equipment installed on a high-rise building',
+        label: 'Rooftop DAS',
+      },
+      {
+        src: img('rooftop-equipment-cabinets'),
+        alt: 'Rooftop equipment cabinets and cable runs mounted along a building’s edge',
+        label: 'Equipment cabinets',
+        shape: 'wide',
       },
       {
         src: img('standby-generator-pad'),
@@ -713,10 +721,9 @@ export const projectsPage = {
         label: 'Standby power',
       },
       {
-        src: img('rooftop-equipment-cabinets'),
-        alt: 'Rooftop equipment cabinets and cable runs mounted along a building’s edge',
-        label: 'Equipment cabinets',
-        shape: 'wide',
+        src: img('security-enclosure-install'),
+        alt: 'Welded steel security enclosure protecting a site alarm and lock on an equipment building',
+        label: 'Site security',
       },
     ] as GalleryItem[],
   },
